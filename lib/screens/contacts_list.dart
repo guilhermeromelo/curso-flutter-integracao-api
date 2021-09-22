@@ -1,7 +1,8 @@
-import 'package:bytebank/database/dao/contact_dao.dart';
-import 'package:bytebank/models/contact.dart';
-import 'package:bytebank/screens/contact_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_api_rest/database/dao/contact_dao.dart';
+import 'package:flutter_api_rest/models/contact.dart';
+
+import 'contact_form.dart';
 
 class ContactsList extends StatefulWidget {
 
@@ -21,7 +22,7 @@ class _ContactsListState extends State<ContactsList> {
       body: FutureBuilder<List<Contact>>(
         initialData: [],
         future: _dao.findAll(),
-        builder: (context, snapshot) {
+        builder: (context, AsyncSnapshot<List<Contact>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
               break;
@@ -40,7 +41,7 @@ class _ContactsListState extends State<ContactsList> {
             case ConnectionState.active:
               break;
             case ConnectionState.done:
-              final List<Contact> contacts = snapshot.data;
+              final List<Contact> contacts = snapshot.data ?? [];
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final Contact contact = contacts[index];

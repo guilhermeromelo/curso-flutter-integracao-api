@@ -1,6 +1,6 @@
-# bytebank
+# flutter_api_rest
 
-A new Bytebank project.
+A new Flutter project.
 
 ## Getting Started
 
